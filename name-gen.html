@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/estilos.css">
+    <link rel="shortcut icon" href="src/img/favicon.ico" type="image/x-icon">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="logo"><a style="text-decoration: none; color: #333;" href="index.html">Nam3.es</a></div>
+        <div class="right-nav">
+            <a href="name-gen.html" class="get-started">Get started</a>
+            <a href="#" class="get-started">Contribute</a>
+        </div>
+    </header>
+    <br><br>
+    <br>
+    <br><br><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a class="voler-al-inicio" href="index.html"><h1 style="text-align: center; color: #333;">⬅ Go back home</h1></a>
+    <div class="main-container">
+        <div id="generator" class="generator-panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <div id="name-gen" class="panel-icon">n3</div>
+                    Name Generator
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="form-group">
+                    <label for="keywords">Enter keywords (separated by spaces or commas)</label>
+                    <input type="text" id="keywords" placeholder="e.g., nature, tech, creative, future">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category">
+                        <option value="">All Categories</option>
+                        <option value="tech">Technology</option>
+                        <option value="nature">Nature-inspired</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="modern">Modern & Professional</option>
+                        <option value="creative">Creative & Artistic</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="generateBtn" class="generate-btn">Generate Names</button>
+            <p style="color: rgb(197, 194, 194);">insert keywords to generate</p>
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Generating names...</p>
+            </div>
+
+            <div class="results-area" id="resultsArea">
+                <div class="results-header">
+                    <h3>Generated Names</h3>
+                    <button id="copyAllBtn" class="secondary-button">Copy All</button>
+                </div>
+
+                <div class="results-stats">
+                    <div class="stat-box">
+                        <div class="stat-label">Total Names</div>
+                        <div class="stat-value" id="totalNames">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Average Length</div>
+                        <div class="stat-value" id="avgLength">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Category</div>
+                        <div class="stat-value" id="categoryLabel">General</div>
+                    </div>
+                </div>
+
+                <div class="name-grid" id="nameGrid">
+                    <!-- Names will be inserted here -->
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</main>
+
+<script src="src/main.js"></script>
+
+</body>
+</html>
