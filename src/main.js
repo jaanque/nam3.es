@@ -82,67 +82,49 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Generate a list of names based on keywords and category
     function generateNamesList(keywordList, category) {
-        const names = [];
+        const names = new Set();  // Use a Set to automatically handle duplicates
         const prefixes = ['Neo', 'Evo', 'Zen', 'Aura', 'Lumi', 'Eco', 'Vibe', 'Pulse', 'Nova', 'Meta'];
         const suffixes = ['ify', 'ly', 'io', 'ium', 'ize', 'era', 'ology', 'scape', 'wave', 'sync'];
         
-        for (let i = 0; i < 12; i++) {
+        while (names.size < 12) {  // Ensure we generate exactly 12 unique names
             let name = '';
             
             // Apply category-specific modifications
             if (category === 'tech') {
-                // Tech names tend to be shorter, modern
                 const randomKeyword = keywordList[Math.floor(Math.random() * keywordList.length)];
                 const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-                
-                if (Math.random() > 0.5) {
-                    name = prefix + randomKeyword.charAt(0).toUpperCase() + randomKeyword.slice(1, 4);
-                } else {
-                    name = randomKeyword.slice(0, 4) + suffixes[Math.floor(Math.random() * suffixes.length)];
-                }
+                name = Math.random() > 0.5 
+                    ? prefix + randomKeyword.charAt(0).toUpperCase() + randomKeyword.slice(1, 4)
+                    : randomKeyword.slice(0, 4) + suffixes[Math.floor(Math.random() * suffixes.length)];
             } else if (category === 'nature') {
-                // Nature names often combine natural elements
                 const natureElements = ['Leaf', 'River', 'Sky', 'Earth', 'Wind', 'Sun', 'Moon', 'Star'];
                 const randomKeyword = keywordList[Math.floor(Math.random() * keywordList.length)];
                 const natureElement = natureElements[Math.floor(Math.random() * natureElements.length)];
-                
-                if (Math.random() > 0.5) {
-                    name = natureElement + randomKeyword.charAt(0).toUpperCase() + randomKeyword.slice(1, 4);
-                } else {
-                    name = randomKeyword.slice(0, 4) + natureElement.toLowerCase();
-                }
+                name = Math.random() > 0.5
+                    ? natureElement + randomKeyword.charAt(0).toUpperCase() + randomKeyword.slice(1, 4)
+                    : randomKeyword.slice(0, 4) + natureElement.toLowerCase();
             } else if (category === 'fantasy') {
-                // Fantasy names tend to be more whimsical
                 const fantasyPrefixes = ['Elv', 'Myth', 'Fae', 'Glimm', 'Whisp', 'Dream', 'Myst'];
                 const fantasySuffixes = ['aria', 'oria', 'wyn', 'eth', 'ora', 'aran', 'ith'];
-                
                 const randomKeyword = keywordList[Math.floor(Math.random() * keywordList.length)];
                 const prefix = fantasyPrefixes[Math.floor(Math.random() * fantasyPrefixes.length)];
                 const suffix = fantasySuffixes[Math.floor(Math.random() * fantasySuffixes.length)];
-                
                 name = prefix + randomKeyword.slice(0, 3) + suffix;
             } else {
-                // Default naming strategy for all categories or when none selected
-                // Randomly select word combination strategy
                 const strategy = Math.floor(Math.random() * 4);
-                
                 if (strategy === 0 && keywordList.length >= 2) {
-                    // Combine parts of two keywords
                     const keyword1 = keywordList[Math.floor(Math.random() * keywordList.length)];
                     const keyword2 = keywordList[Math.floor(Math.random() * keywordList.length)];
                     name = keyword1.slice(0, 4) + keyword2.slice(-3);
                 } else if (strategy === 1) {
-                    // Use prefix + keyword
                     const randomKeyword = keywordList[Math.floor(Math.random() * keywordList.length)];
                     const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
                     name = prefix + randomKeyword.charAt(0).toUpperCase() + randomKeyword.slice(1);
                 } else if (strategy === 2) {
-                    // Use keyword + suffix
                     const randomKeyword = keywordList[Math.floor(Math.random() * keywordList.length)];
                     const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
                     name = randomKeyword.charAt(0).toUpperCase() + randomKeyword.slice(1) + suffix;
                 } else {
-                    // Mix letters from multiple keywords
                     if (keywordList.length >= 2) {
                         const keyword1 = keywordList[Math.floor(Math.random() * keywordList.length)];
                         const keyword2 = keywordList[Math.floor(Math.random() * keywordList.length)];
@@ -155,27 +137,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            // Capitalize first letter
             name = name.charAt(0).toUpperCase() + name.slice(1);
             
-            // Ensure names are unique
-            if (!names.includes(name)) {
-                names.push(name);
-            } else {
-                // If duplicate, try adding a number
-                names.push(name + Math.floor(Math.random() * 100));
-            }
+            // Add to Set to ensure uniqueness
+            names.add(name);
         }
         
-        return names;
+        return Array.from(names);  // Convert Set back to Array
     }
     
     // Display the results
     function displayResults(names) {
-        // Clear previous results
         nameGrid.innerHTML = '';
         
-        // Add each name as a card
         names.forEach(name => {
             const nameCard = document.createElement('div');
             nameCard.className = 'name-card';
@@ -195,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function() {
             nameGrid.appendChild(nameCard);
         });
         
-        // Show results area
         resultsArea.style.display = 'block';
     }
     
@@ -203,6 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function copyToClipboard(name) {
         navigator.clipboard.writeText(name).then(() => {
             showToast(`"${name}" copied to clipboard!`);
+        }).catch(() => {
+            showToast("Failed to copy to clipboard.");
         });
     }
     
@@ -211,6 +186,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const names = Array.from(document.querySelectorAll('.name-text')).map(el => el.textContent);
         navigator.clipboard.writeText(names.join('\n')).then(() => {
             showToast('All names copied to clipboard!');
+        }).catch(() => {
+            showToast("Failed to copy all names.");
         });
     }
     
