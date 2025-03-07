@@ -1,0 +1,30 @@
+.container {
+    text-align: center;
+}
+
+.h1 {
+    margin: 0;
+    font-size: 150px;
+    color: #333;
+}
+
+.a {
+    text-decoration: none;
+}
+
+button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+button:hover {
+    background-color: #646464;
+    transition: 1s;
+}
