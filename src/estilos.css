@@ -476,3 +476,36 @@ input:focus, select:focus {
     border-radius: 50%;
     object-fit: cover;
 }
+
+.copy{
+    text-align: center;
+    font-size: 15px;
+}
+
+.copy {
+    text-align: center;
+    font-size: 15px;
+    /* Puedes agregar otros estilos generales si es necesario */
+}
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+    .copy {
+        font-size: 12px; /* Reducimos el tamaño de fuente en pantallas pequeñas */
+        padding: 10px; /* Agregar algo de espacio alrededor */
+    }
+}
+
+/* Estilos para pantallas medianas (tabletas) */
+@media (max-width: 1024px) {
+    .copy {
+        font-size: 14px; /* Tamaño de fuente ligeramente mayor para tabletas */
+    }
+}
+
+/* Estilos para pantallas grandes (escritorios) */
+@media (min-width: 1025px) {
+    .copy {
+        font-size: 16px; /* Aumentamos el tamaño de fuente para pantallas grandes */
+    }
+}
